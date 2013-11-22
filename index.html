@@ -1,0 +1,48 @@
+<html>
+<head>
+  <title>DPI Monster</title>
+  <link rel="stylesheet" href="style.css" type="text/css">
+  <meta charset="utf-8">
+</head>
+<body>
+  <h1>~ DPI ~</h1>
+  <div id="calc_contain">
+    <p><a href="dpi_monster.html">Erklärung: Zusammenhang dpi und Pixel</a></p>
+    <div id="input_col">
+    <p>Pixelangaben zum Bild (Breite x Höhe in px)?</p>
+    <input id="px_width" type="text" size="5">x<input id="px_height" type="text" size="5">
+    <p>Welche Abmessungen soll das Bild im Druck haben (Breite x Höhe in mm)?</p>
+    <input id="mm_width" type="text" size="5">x<input id="mm_height" type="text" size="5">
+    <p>Welcher DPI-Wert wird erwartet (Breite x Höhe in dpi)?</p>
+    <input id="dpi_width" type="text" value="300" size="5">x<input id="dpi_height" type="text" value="300" size="5">
+    <button id="calc_baby">berechnen</button>
+    </div>
+    <div id="output_col">
+      <p>Punkte gleich Rasterkacheln bei Offsetdruck</p>
+      <p id="print_in_title">Bildabmessung Druck in Inch</p>
+      <ul>
+        <li>Breite: <span id="print_in_width"></span>in</li>
+        <li>Höhe: <span id="print_in_height"></span>in</li>
+      </ul>
+      <p id="pt_size_title">Punktgröße in mm</p>
+      <ul>
+        <li>Breite: <span id="pt_size_width"></span>mm</li>
+        <li>Höhe: <span id="pt_size_height"></span>mm</li>
+      </ul>
+      <p id="amount_pt_title">Anzahl aller Punkte für angegebene Bildabmessung</p>
+      <ul>
+        <li>Breite: <span id="amount_pt_width"></span></li>
+        <li>Höhe: <span id="amount_pt_height"></span></li>
+      </ul>
+      <p id="pt_px_ratio_title">Pixel / Punkt Verhältnis</p>
+      <p id="pt_px_ratio_desc">größere Werte bedeuten besser qualität. Wert 1 bedeutet für jeden Punkt gibt es ein Pixel.</p>
+      <ul>
+        <li>Breite: <span id="pt_px_ratio_width"></span></li>
+        <li>Höhe: <span id="pt_px_ratio_height"></span></li>
+      </ul>
+    </div>
+  </div>
+  <script type="application/dart" src="dpi.dart"></script>
+  <script>if (navigator.webkitStartDart) navigator.webkitStartDart();</script>
+</body>
+</html>

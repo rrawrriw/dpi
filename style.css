@@ -1,0 +1,57 @@
+h1 {
+  text-align: center;
+  font-size: 2.7em;
+  margin-bottom: 1em;
+  margin-top: 1em;
+}
+
+ul {
+  list-style: none;
+}
+
+#calc_contain {
+  overflow: hidden;
+  margin: auto;
+  width: 48em;
+}
+
+#input_col {
+  float: left;
+  padding-right: 3em;
+  width: 20em;
+}
+
+#output_col {
+  float: left;
+  width: 20em;
+  border-left: 1px solid gray;
+  padding-left: 3em;
+}
+
+
+#calc_baby {
+  margin-top: 0.5em;
+  display: block;
+}
+
+#pt_px_ratio_title, 
+#amount_pt_title,
+#print_in_title,
+#pt_size_title {
+  font-weight: bold;
+}
+
+#pt_px_ratio_title {
+  margin: 0;
+}
+
+#pt_px_ratio_desc {
+  font-style: italic;
+  font-size: 0.9em;
+  margin: 0;
+}
+
+#dpi_monster_story {
+  width: 40em;
+  margin: auto;
+}
