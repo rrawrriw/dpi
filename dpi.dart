@@ -35,4 +35,3 @@ calc(e) {
   query("#pt_px_ratio_height").text = ptPxRatioHeight.toString();
 
 }
-
