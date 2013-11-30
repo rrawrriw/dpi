@@ -1,37 +1,69 @@
 import "dart:html";
 
 main() {
-  query("#calc_baby").onClick.listen(calc);   
+  query("#calc_baby").onClick.listen((e) { 
+      calc(e);
+      query("#input_blob").style.display = "none";
+      query("#input_info_short").style.display = "block";
+      query("#info_blob").style.display = "block";
+      query("#legend_blob").style.display = "block";
+  });
+
+  query("#input_info_short").onClick.listen((e) {
+      query("#input_blob").style.display = "block";
+      query("#input_info_short").style.display = "none";
+      query("#info_blob").style.display = "none";
+      query("#legend_blob").style.display = "none";
+  });
+
+  query("#img_path_tmp").onChange.listen((e) {
+    var files = query("#img_path_tmp").files;
+    if (files.length == 1) {
+      final img = files[0];
+      final reader = new FileReader();
+      reader.addEventListener("load", (e) {
+        query("#img_path").value = img.name;
+        query("#funky_img").src = reader.result;
+        query("#funky_img_small").src = reader.result;
+      });
+      reader.readAsDataUrl(img);
+    }
+  });
 }
 
 calc(e) {
+  var dpi = [200, 300];
+  var qualityResult = [];
+  var pxWidth = int.parse(query("#funky_img").width.toString());
+  var pxHeight = int.parse(query("#funky_img").height.toString());
+  var mmWidth = int.parse(query("#mm_width").value.toString());
+  var mmHeight = mmWidth/pxWidth*pxHeight;
+
+  dpi.forEach((dpi) {
+    qualityResult.add(check_quality(pxWidth, pxHeight, mmWidth, mmHeight, dpi));
+  });
+
+  query("#px_width").text = pxWidth.toString() + "px";
+  query("#px_height").text = pxHeight.toString() + "px";
+  
+}
+
+check_quality(pxWidth, pxHeight, mmWidth, mmHeight, dpi) {
   var oneInchInMm = 25.4;
-  var pxWidth = int.parse(query("#px_width").value);
-  var pxHeight = int.parse(query("#px_height").value);
-  var mmWidth = int.parse(query("#mm_width").value);
-  var mmHeight = int.parse(query("#mm_height").value);
-  var dpiWidth = int.parse(query("#dpi_width").value);
-  var dpiHeight = int.parse(query("#dpi_height").value);
+  var quality = 1; // 1 = bad, 2 = ok, 3 = good
+  var amountPointsWidth = mmWidth/oneInchInMm; 
+  var amountPointsHeight = mmHeight/oneInchInMm; 
+  var ptPxRatioWidth = (pxWidth/amountPointsWidth);
+  var ptPxRatioHeight = (pxHeight/amountPointsHeight);
 
-  var printInWidth = mmWidth/oneInchInMm;
-  var printInHeight = mmHeight/oneInchInMm;
-  
-  var onePtWidth = oneInchInMm/dpiWidth;
-  var onePtHeight = oneInchInMm/dpiHeight; 
+  if (ptPxRatioWidth > 1 && ptPxRatioHeight > 1) {
+    quality = 3;
+  } else if (ptPxRatioWidth > 0.5 && ptPxRatioHeight > 0.5) {
+    quality = 2;
+  } else if (ptPxRatioWidth < 0.5 && ptPxRatioHeight < 0.5) {
+    quality = 1;
+  }
 
-  var amountPtWidth = printInWidth*dpiWidth;
-  var amountPtHeight = printInHeight*dpiHeight;
-
-  var ptPxRatioWidth = (pxWidth/amountPtWidth);
-  var ptPxRatioHeight = (pxHeight/amountPtHeight);
-  
-  query("#print_in_width").text = printInWidth.toString();
-  query("#print_in_height").text = printInHeight.toString();
-  query("#pt_size_width").text = onePtWidth.toString();
-  query("#pt_size_height").text = onePtHeight.toString();
-  query("#amount_pt_width").text = amountPtWidth.toString();
-  query("#amount_pt_height").text = amountPtHeight.toString();
-  query("#pt_px_ratio_width").text = ptPxRatioWidth.toString();
-  query("#pt_px_ratio_height").text = ptPxRatioHeight.toString();
+  return quality;
 
 }
