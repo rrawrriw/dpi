@@ -37,7 +37,7 @@ ul {
 }
 
 #input_blob #form {
-  width: 24em;
+  width: 28em;
   margin: auto;
 }
 
@@ -52,20 +52,32 @@ ul {
   z-index: 1;
 }
 
+#img_upload_button:hover {
+  color: #ddd;
+}
+
+#file_upload button {
+  cursor: pointer;
+}
+
 #img_path_tmp {
+  padding-top: 0.2em;
+  margin: 0;
+  font-size: 1.3em;
   position: relative;
   text-align: right;
-  -moz-opacity:0 ;
-  filter:alpha(opacity: 0);
   opacity: 0;
+  -moz-opacity: 0;
+  filter:alpha(opacity: 0);
   z-index: 2;
+  cursor: pointer;
 }
 
 
 #calc_baby,
 #img_upload_button {
   border: #0ca1e3 solid 0.2em;
-  padding: 0.4em; 
+  padding: 0.3em; 
   background: #0ca1e3;
   color: #fff;
   font-family: sans-serif;
@@ -177,11 +189,9 @@ ul {
 }
 
 #dpi200 {
-  background: #ffcc00;
 }
 
 #dpi300 {
-  background: #94c54f;
 }
 
 #legend_blob {
@@ -209,15 +219,16 @@ ul {
   text-align: center;
 }
 
-#try_again {
+
+.try_again {
   background: #cd3f3f;
 }
 
-#not_bad {
+.not_bad {
   background: #ffcc00;
 }
 
-#well_done {
+.well_done {
   background: #94c54f;
 }
 

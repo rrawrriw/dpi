@@ -32,16 +32,16 @@ main() {
 }
 
 calc(e) {
-  var dpi = [200, 300];
-  var qualityResult = [];
   var pxWidth = int.parse(query("#funky_img").width.toString());
   var pxHeight = int.parse(query("#funky_img").height.toString());
   var mmWidth = int.parse(query("#mm_width").value.toString());
   var mmHeight = mmWidth/pxWidth*pxHeight;
+  var tmp_quality = "try_again";
 
-  dpi.forEach((dpi) {
-    qualityResult.add(check_quality(pxWidth, pxHeight, mmWidth, mmHeight, dpi));
-  });
+  tmp_quality = check_quality(pxWidth, pxHeight, mmWidth, mmHeight, 200);
+  query("#dpi200").classes = [tmp_quality];
+  tmp_quality = check_quality(pxWidth, pxHeight, mmWidth, mmHeight, 300);
+  query("#dpi300").classes = [tmp_quality];
 
   query("#px_width").text = pxWidth.toString() + "px";
   query("#px_height").text = pxHeight.toString() + "px";
@@ -50,18 +50,22 @@ calc(e) {
 
 check_quality(pxWidth, pxHeight, mmWidth, mmHeight, dpi) {
   var oneInchInMm = 25.4;
-  var quality = 1; // 1 = bad, 2 = ok, 3 = good
-  var amountPointsWidth = mmWidth/oneInchInMm; 
-  var amountPointsHeight = mmHeight/oneInchInMm; 
+  var quality = "try_again";
+  var amountPointsWidth = (mmWidth/oneInchInMm)*dpi; 
+  var amountPointsHeight = (mmHeight/oneInchInMm)*dpi; 
   var ptPxRatioWidth = (pxWidth/amountPointsWidth);
   var ptPxRatioHeight = (pxHeight/amountPointsHeight);
 
+  print(dpi.toString() +"dpi --------------");
+  print("amount of points (width): "+ amountPointsWidth.toString());
+  print("amount of points (height): "+ amountPointsHeight.toString());
+  print("points in relation to pixel amount (width): "+ ptPxRatioWidth.toString());
+  print("points in relation to pixel amount (height): "+ ptPxRatioHeight.toString());
+
   if (ptPxRatioWidth > 1 && ptPxRatioHeight > 1) {
-    quality = 3;
+    quality = "well_done";
   } else if (ptPxRatioWidth > 0.5 && ptPxRatioHeight > 0.5) {
-    quality = 2;
-  } else if (ptPxRatioWidth < 0.5 && ptPxRatioHeight < 0.5) {
-    quality = 1;
+    quality = "not_bad";
   }
 
   return quality;
