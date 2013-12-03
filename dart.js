@@ -6156,7 +6156,7 @@ main: function() {
 },
 
 calc: function(e) {
-  var pxWidth, pxHeight, mmWidth, mmHeight, tmp_quality;
+  var pxWidth, pxHeight, mmWidth, tmp_quality;
   pxWidth = H.Primitives_parseInt(J.toString$0(J.get$width$x(document.querySelector("#funky_img"))), null, null);
   pxHeight = H.Primitives_parseInt(J.toString$0(J.get$height$x(document.querySelector("#funky_img"))), null, null);
   mmWidth = H.Primitives_parseInt(J.toString$0(J.get$value$x(document.querySelector("#mm_width"))), null, null);
@@ -6166,17 +6166,16 @@ calc: function(e) {
     throw H.iae(pxWidth);
   if (typeof pxHeight !== "number")
     throw H.iae(pxHeight);
-  mmHeight = mmWidth / pxWidth * pxHeight;
-  tmp_quality = N.check_quality(pxWidth, pxHeight, mmWidth, mmHeight, 200);
-  J.set$classes$x(document.querySelector("#dpi200"), [tmp_quality]);
-  tmp_quality = N.check_quality(pxWidth, pxHeight, mmWidth, mmHeight, 300);
-  J.set$classes$x(document.querySelector("#dpi300"), [tmp_quality]);
+  tmp_quality = N.check_quality(pxWidth, pxHeight, mmWidth, mmWidth / pxWidth * pxHeight, 300);
+  J.set$classes$x(document.querySelector("#img_quality_result"), [tmp_quality.$index(tmp_quality, "class")]);
+  document.querySelector("#img_quality_result p").textContent = tmp_quality.$index(tmp_quality, "text");
   document.querySelector("#px_width").textContent = C.JSNumber_methods.toString$0(pxWidth) + "px";
   document.querySelector("#px_height").textContent = C.JSNumber_methods.toString$0(pxHeight) + "px";
 },
 
 check_quality: function(pxWidth, pxHeight, mmWidth, mmHeight, dpi) {
-  var amountPointsWidth, amountPointsHeight, ptPxRatioWidth, ptPxRatioHeight, quality;
+  var quality, amountPointsWidth, amountPointsHeight, ptPxRatioWidth, ptPxRatioHeight;
+  quality = H.fillLiteralMap(["class", "try_again", "text", "schlecht"], P.LinkedHashMap_LinkedHashMap(null, null, null, null, null));
   amountPointsWidth = mmWidth / 25.4 * dpi;
   amountPointsHeight = mmHeight / 25.4 * dpi;
   if (typeof pxWidth !== "number")
@@ -6191,9 +6190,9 @@ check_quality: function(pxWidth, pxHeight, mmWidth, mmHeight, dpi) {
   P.print("points in relation to pixel amount (width): " + C.JSNumber_methods.toString$0(ptPxRatioWidth));
   P.print("points in relation to pixel amount (height): " + C.JSNumber_methods.toString$0(ptPxRatioHeight));
   if (ptPxRatioWidth > 1 && ptPxRatioHeight > 1)
-    quality = "well_done";
-  else
-    quality = ptPxRatioWidth > 0.5 && ptPxRatioHeight > 0.5 ? "not_bad" : "try_again";
+    quality = H.fillLiteralMap(["class", "well_done", "text", "gut"], P.LinkedHashMap_LinkedHashMap(null, null, null, null, null));
+  else if (ptPxRatioWidth > 0.5 && ptPxRatioHeight > 0.5)
+    quality = H.fillLiteralMap(["class", "not_bad", "text", "geht so"], P.LinkedHashMap_LinkedHashMap(null, null, null, null, null));
   return quality;
 },
 

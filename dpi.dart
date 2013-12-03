@@ -38,10 +38,9 @@ calc(e) {
   var mmHeight = mmWidth/pxWidth*pxHeight;
   var tmp_quality = "try_again";
 
-  tmp_quality = check_quality(pxWidth, pxHeight, mmWidth, mmHeight, 200);
-  query("#dpi200").classes = [tmp_quality];
   tmp_quality = check_quality(pxWidth, pxHeight, mmWidth, mmHeight, 300);
-  query("#dpi300").classes = [tmp_quality];
+  query("#img_quality_result").classes = [tmp_quality["class"]];
+  query("#img_quality_result p").text = tmp_quality["text"];
 
   query("#px_width").text = pxWidth.toString() + "px";
   query("#px_height").text = pxHeight.toString() + "px";
@@ -50,7 +49,7 @@ calc(e) {
 
 check_quality(pxWidth, pxHeight, mmWidth, mmHeight, dpi) {
   var oneInchInMm = 25.4;
-  var quality = "try_again";
+  var quality = {"class": "try_again", "text": "schlecht"};
   var amountPointsWidth = (mmWidth/oneInchInMm)*dpi; 
   var amountPointsHeight = (mmHeight/oneInchInMm)*dpi; 
   var ptPxRatioWidth = (pxWidth/amountPointsWidth);
@@ -63,9 +62,9 @@ check_quality(pxWidth, pxHeight, mmWidth, mmHeight, dpi) {
   print("points in relation to pixel amount (height): "+ ptPxRatioHeight.toString());
 
   if (ptPxRatioWidth > 1 && ptPxRatioHeight > 1) {
-    quality = "well_done";
+    quality = {"class": "well_done", "text": "gut"};
   } else if (ptPxRatioWidth > 0.5 && ptPxRatioHeight > 0.5) {
-    quality = "not_bad";
+    quality = {"class": "not_bad", "text": "geht so"};
   }
 
   return quality;

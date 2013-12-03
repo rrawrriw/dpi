@@ -152,7 +152,8 @@ ul {
 #img_preview {
   float: left;
   margin-left: 29.03em;
-  width: 11.089em;
+  width: 12.089em;
+  overflow: hidden;
 }
 
 #funky_img_small {
@@ -173,25 +174,21 @@ ul {
   margin-left: 0.618em;
 }
 
-#img_quality {
+#img_quality_result {
   float: left;
   padding: 0;
   margin: 0;
+  margin-top: 1.618em;
   font-size: 1.618em;
-}
-
-#dpi200,
-#dpi300 {
   margin-bottom: 1.618em;
-  padding: 1em;
-  text-align: center;
+  width: 6.854em;
+  height: 4.236em;
   vertical-align: middle;
 }
 
-#dpi200 {
-}
-
-#dpi300 {
+#img_quality_result p {
+  text-align: center;
+  padding: 0;
 }
 
 #legend_blob {
@@ -215,7 +212,7 @@ ul {
   margin-right: 1em;
   padding: 0.618em;
   font-weight: bold;
-  width: 4.236em;
+  width: 6.854em;
   text-align: center;
 }
 
