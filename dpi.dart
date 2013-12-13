@@ -16,13 +16,12 @@ main() {
       query("#legend_blob").style.display = "none";
   });
 
-  query("#img_path_tmp").onChange.listen((e) {
-    var files = query("#img_path_tmp").files;
+  query("#img_path").onChange.listen((e) {
+    var files = query("#img_path").files;
     if (files.length == 1) {
       final img = files[0];
       final reader = new FileReader();
       reader.addEventListener("load", (e) {
-        query("#img_path").value = img.name;
         query("#funky_img").src = reader.result;
         query("#funky_img_small").src = reader.result;
       });
@@ -32,8 +31,8 @@ main() {
 }
 
 calc(e) {
-  var pxWidth = int.parse(query("#funky_img").width.toString());
-  var pxHeight = int.parse(query("#funky_img").height.toString());
+  var pxWidth = int.parse(query("#funky_img").naturalWidth.toString());
+  var pxHeight = int.parse(query("#funky_img").naturalHeight.toString());
   var mmWidth = int.parse(query("#mm_width").value.toString());
   var mmHeight = mmWidth/pxWidth*pxHeight;
   var tmp_quality = "try_again";

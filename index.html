@@ -11,13 +11,8 @@
       <div id="form">
         <ol>
           <li>
-            <div id="file_upload">
-              <input type="file" id="img_path_tmp">
-              <div id="fake_upload">
-                <button id="img_upload_button">Bild auswählen</button>
-                <input type="text" id="img_path" disabled>
-              </div>
-            </div>
+            <p>Bild auswählen</p>
+            <input type="file" id="img_path">
           </li>
           <li>
             <p>Welche Breite (in mm) soll das Bild im Druck haben?</p>
@@ -58,8 +53,15 @@
       </ul>
     </div>
 
+    <div id="foo">
+      <ol>
+        <li><a href="requirements.html">Systemvoraussetzungen</a></li>
+        <li><a href="dpi_monster.html">Weiter Informationen zu Dpi- und Pixelangaben</a></li>
+      </ol>
+    </div>
+
   <script type="application/dart" src="dpi.dart"></script>
   <script>if (navigator.webkitStartDart) navigator.webkitStartDart();</script>
-  <script src="dart.js"></script>
+  <script src="dpi.js"></script>
 </body>
 </html>
