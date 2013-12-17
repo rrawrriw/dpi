@@ -122,16 +122,17 @@ ul {
 #info_blob {
   display: none;
   background: #0ca1e3;
-  margin: 0;
+  margin-right: auto;
+  margin-left: auto;
   padding-top: 2.618em;
   color: #fff;
   font-weight: bold;
   overflow: hidden;
+  width: 34em;
 }
 
 #img_preview {
   float: left;
-  margin-left: 29.03em;
   width: 12.089em;
   overflow: hidden;
 }
